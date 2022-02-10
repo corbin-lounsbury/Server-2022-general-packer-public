@@ -14,7 +14,7 @@ Set-Location -Path $destPath\$publicRepo
 Get-ChildItem -path $destPath\$publicRepo\* -exclude /git | Remove-Item -Force
 
 # Copies the working directory in, commits,  and pushes to the public repo
-Copy-Item -Path $PSScriptRoot\* -Destination $destPath\$publicRepo -Recurse -Force -Exclude .git
+Copy-Item -Path $PSScriptRoot\* -Destination $destPath\$publicRepo -Recurse -Force -Exclude .git,post
 start-process git -ArgumentList "add ." -Wait -NoNewWindow
 start-process git -ArgumentList "commit -m automated_push" -Wait -NoNewWindow
 start-process git -ArgumentList "push -u origin main" -Wait -NoNewWindow
