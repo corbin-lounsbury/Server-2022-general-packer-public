@@ -77,19 +77,16 @@ jobs:
         .\win2022.core\
       # The above run call makes heavy use of masked secrets held in GitHub Actions. Substitute for your own variables or secrets
 
-  Push2Public:
+  Push2Public: #used to push from a private repo to a public one. Remove everything below this line if you don't want to use it. 
     needs: 
       - build-2022Core
       - build-2022GUI
-    runs-on: ubuntu-latest
+    runs-on: packer-windows
     steps:
+    - uses: actions/checkout@v2
     - name: Pushes to public
-      uses: cpina/github-action-push-to-another-repository@main
       env:
-        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-      with:
-        source-directory: '.'
-        destination-github-username: 'corbin-lounsbury'
-        destination-repository-name: 'Server-2022-general-packer-public'
-        user-email: corbin.lounsbury@gmail.com
-        target-branch: main
+        github_pat: ${{ secrets.API_TOKEN_GITHUB }}
+        public_repo: ${{ secrets.PUBLIC_REPO }}
+        push_user: ${{ secrets.PUSH_USER }}
+      run: .\clone-repo.ps1 -publicRepo "${{ env.public_repo }}" -gitToken "${{ env.github_pat }}" -gitUser "${{ env.push_user }}"

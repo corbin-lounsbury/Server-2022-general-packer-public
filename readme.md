@@ -16,4 +16,10 @@ Notes:
 - This assumes the template does not already exist. Use the `-force` flag to destroy and recreate the template.
 - Use the `-var` switch to pass precedence variables. Useful for running on GitHub Actions/Gitlab CICD using masked variables for sensitive data (env creds).
 
+**Other notes**
+
+A workflow template has been included for convenience if you with to make this part of an actions/CICD workflow. It includes heavy uses of Github/Gitlab secrets. Make sure you configure them to your specific environment
+
+Additionally, I have my private repo workflow configured to push to a public repo. Remove the job if you don't want to use it. 
+
 Windows Server 2022 eval ISO (for lab/development use): https://software-download.microsoft.com/download/sg/20348.169.210806-2348.fe_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso
