@@ -47,9 +47,6 @@ source "vsphere-iso" "server-2022-core" {
 build {
   sources = ["source.vsphere-iso.server-2022-core"]
 
-  # provisioner "powershell" { //run as admin?
-  #   script = "./scripts/win-update.ps1"
-  # }
   provisioner "windows-update" {
     search_criteria = "IsInstalled=0"
   }
